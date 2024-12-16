@@ -1,33 +1,40 @@
 <template>
-  <div>
-    <h1>User List</h1>
-    <ul>
-      <li v-for="user in users" :key="user.id">{{ user.name }}</li>
-    </ul>
+  <div id="app">
+    <HeaderComponent />
+    <main>
+      <h2>Willkommen auf der Hauptseite</h2>
+      <p>Das ist der Hauptinhalt der Seite.</p>
+    </main>
+    <FooterComponent />
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
 
 export default {
-  data() {
-    return {
-      users: [],
-    };
-  },
-  mounted() {
-    this.fetchUsers();
-  },
-  methods: {
-    async fetchUsers() {
-      try {
-        const response = await axios.get('http://localhost:1337/api/users');
-        this.users = response.data;
-      } catch (error) {
-        console.error('Fehler beim Abrufen der Benutzer:', error);
-      }
-    },
+  name: 'App',
+  components: {
+    HeaderComponent,
+    FooterComponent,
   },
 };
 </script>
+
+<style>
+@import './assets/styles.css';
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+</style>
